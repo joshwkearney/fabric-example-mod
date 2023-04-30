@@ -1,27 +1,21 @@
 package net.fabricmc.example;
 
-import java.util.Collections;
-import java.util.List;
-
-import alexiil.mc.lib.attributes.AttributeList;
-import alexiil.mc.lib.attributes.AttributeProvider;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
-import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Direction.Axis;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class TankBlock extends Block implements BlockEntityProvider, AttributeProvider {// implements BlockEntityProvider, AttributeProvider {
-    //public static final VoxelShape SHAPE = VoxelShapes.fullCube();
-
+public class TankBlock extends Block implements BlockEntityProvider {
     public TankBlock() {
         super(FabricBlockSettings.copy(Blocks.GLASS).nonOpaque());
     }
@@ -33,33 +27,21 @@ public class TankBlock extends Block implements BlockEntityProvider, AttributePr
     }
 
     @Override
-    public void addAllAttributes(World world, BlockPos pos, BlockState state, AttributeList<?> to) {
-        if (world.getBlockEntity(pos) instanceof TankBlockEntity tank) {
-            to.offer(tank.fluidInventory);
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
+                              BlockHitResult hit) {
+
+        if (player.world.isClient) {
+            return ActionResult.SUCCESS;
         }
+
+        if (!(world.getBlockEntity(pos) instanceof TankBlockEntity tank)) {
+            return ActionResult.PASS;
+        }
+
+        if (FluidStorageUtil.interactWithFluidStorage(tank.fluid, player, hand)) {
+            return ActionResult.SUCCESS;
+        }
+
+        return ActionResult.PASS;
     }
-
-   /* @Override
-    public VoxelShape getOutlineShape(BlockState blockState_1, BlockView blockView_1, BlockPos blockPos_1,
-                                      ShapeContext verticalEntityPosition_1) {
-        return SHAPE;
-    }
-
-    @Override
-    public boolean isSideInvisible(BlockState thisState, BlockState otherState, Direction side) {
-        if (otherState.getBlock() == this) {
-            return true;
-        }
-
-        return false;
-    }*/
-
-    /*@Override
-    public void addAllAttributes(World world, BlockPos pos, BlockState state, AttributeList<?> to) {
-        BlockEntity be = world.getBlockEntity(pos);
-        if (be instanceof TankTile) {
-            TankTile tank = (TankTile) be;
-            to.offer(tank.fluidInv, SHAPE);
-        }
-    }*/
 }

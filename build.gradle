@@ -29,8 +29,8 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Fabric multipart API
-	modApi "alexiil.mc.lib:libblockattributes-all:0.12.0"
-	include "alexiil.mc.lib:libblockattributes-all:0.12.0"
+	//modApi "alexiil.mc.lib:libblockattributes-all:0.12.0"
+	//include "alexiil.mc.lib:libblockattributes-all:0.12.0"
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
