@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "examplemod",
   "version": "${version}",
 
   "name": "Example Mod",
@@ -20,11 +20,12 @@
   "entrypoints": {
     "main": [
       "net.fabricmc.example.ExampleMod"
+    ],
+    "client": [
+      "net.fabricmc.example.ExampleModClient"
     ]
   },
-  "mixins": [
-    "modid.mixins.json"
-  ],
+  "mixins": [ ],
 
   "depends": {
     "fabricloader": ">=0.14.19",
