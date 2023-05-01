@@ -2,8 +2,8 @@ package net.fabricmc.example;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.example.render.FluidRenderFace;
-import net.fabricmc.example.render.FluidVolumeRenderer;
+import net.fabricmc.example.render.fluid.FluidRenderFace;
+import net.fabricmc.example.render.fluid.FluidVolumeRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
@@ -12,9 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.Direction;
 
-import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class TankRenderer implements BlockEntityRenderer<TankBlockEntity> {
@@ -33,8 +31,6 @@ public class TankRenderer implements BlockEntityRenderer<TankBlockEntity> {
 
         matrices.push();
 
-        List<FluidRenderFace> faces = new ArrayList<>();
-
         double epsilon = 0.001;
 
         double x0 = 0 / 16d + epsilon;
@@ -47,11 +43,7 @@ public class TankRenderer implements BlockEntityRenderer<TankBlockEntity> {
         double z1 = 16 / 16d - epsilon;
 
         var sides = EnumSet.allOf(Direction.class);
-        FluidRenderFace.appendCuboid(x0, y0, z0, x1, y1, z1, 1, sides, faces);
-
-        for (FluidRenderFace face : faces) {
-            face.light = light;
-        }
+        var faces = FluidRenderFace.cuboid(x0, y0, z0, x1, y1, z1, 1, sides, light,false);
 
         FluidVolumeRenderer.INSTANCE.render(blockEntity.fluid.variant, faces, vertexConsumers, matrices);
         matrices.pop();
