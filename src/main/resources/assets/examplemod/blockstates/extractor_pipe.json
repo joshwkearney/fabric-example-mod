@@ -1,0 +1,82 @@
+{
+  "multipart": [
+    {
+      "when": { "facing": "north" },
+      "apply": { "model": "examplemod:block/extractor_pipe" }
+    },
+    {
+      "when": { "facing": "east" },
+      "apply": {
+        "model": "examplemod:block/extractor_pipe",
+        "y": 90
+      }
+    },
+    {
+      "when": { "facing": "south" },
+      "apply": {
+        "model": "examplemod:block/extractor_pipe",
+        "y": 180
+      }
+    },
+    {
+      "when": { "facing": "west" },
+      "apply": {
+        "model": "examplemod:block/extractor_pipe",
+        "y": 270
+      }
+    },
+    {
+      "when": { "facing": "up" },
+      "apply": {
+        "model": "examplemod:block/extractor_pipe",
+        "x": 270
+      }
+    },
+    {
+      "when": { "facing": "down" },
+      "apply": {
+        "model": "examplemod:block/extractor_pipe",
+        "x": 90
+      }
+    },
+    {
+      "when": { "north": true },
+      "apply": { "model": "examplemod:block/extractor_pipe_side" }
+    },
+    {
+      "when": { "east": true },
+      "apply": {
+        "model": "examplemod:block/extractor_pipe_side",
+        "y": 90
+      }
+    },
+    {
+      "when": { "south": true },
+      "apply": {
+        "model": "examplemod:block/extractor_pipe_side",
+        "y": 180
+      }
+    },
+    {
+      "when": { "west": true },
+      "apply": {
+        "model": "examplemod:block/extractor_pipe_side",
+        "y": 270
+      }
+    },
+    {
+      "when": { "up": true },
+      "apply": {
+        "model": "examplemod:block/extractor_pipe_side",
+        "x": 270
+      }
+    },
+    {
+      "when": { "down": true },
+      "apply": {
+        "model": "examplemod:block/extractor_pipe_side",
+        "x": 90
+      }
+    }
+  ]
+}
