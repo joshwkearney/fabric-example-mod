@@ -1,9 +1,9 @@
-package joshuakearney.practicalpipes.features.tank;
+package joshuakearney.practical_pipes.features.tank;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import joshuakearney.practicalpipes.render.FluidRenderFace;
-import joshuakearney.practicalpipes.render.FluidVolumeRenderer;
+import joshuakearney.practical_pipes.render.FluidRenderFace;
+import joshuakearney.practical_pipes.render.FluidVolumeRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;

@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-package joshuakearney.practicalpipes.features.pipes;
+package joshuakearney.practical_pipes.features.pipes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.Direction;

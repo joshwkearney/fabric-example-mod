@@ -1,4 +1,4 @@
-package joshuakearney.practicalpipes.features.pipes;
+package joshuakearney.practical_pipes.features.pipes;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;

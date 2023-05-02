@@ -1,6 +1,6 @@
-package joshuakearney.practicalpipes.features.tank;
+package joshuakearney.practical_pipes.features.tank;
 
-import joshuakearney.practicalpipes.PracticalPipes;
+import joshuakearney.practical_pipes.PracticalPipes;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;

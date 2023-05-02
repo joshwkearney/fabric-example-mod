@@ -1,4 +1,4 @@
-package joshuakearney.practicalpipes.features.pipes;
+package joshuakearney.practical_pipes.features.pipes;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;

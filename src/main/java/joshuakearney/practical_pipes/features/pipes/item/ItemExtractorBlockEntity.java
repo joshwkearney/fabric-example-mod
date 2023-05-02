@@ -1,9 +1,9 @@
-package joshuakearney.practicalpipes.features.pipes.item;
+package joshuakearney.practical_pipes.features.pipes.item;
 
-import joshuakearney.practicalpipes.PracticalPipes;
-import joshuakearney.practicalpipes.features.pipes.PipeBlockEntity;
-import joshuakearney.practicalpipes.features.pipes.PipeNavigator;
-import joshuakearney.practicalpipes.features.pipes.PipeResource;
+import joshuakearney.practical_pipes.PracticalPipes;
+import joshuakearney.practical_pipes.features.pipes.PipeBlockEntity;
+import joshuakearney.practical_pipes.features.pipes.PipeNavigator;
+import joshuakearney.practical_pipes.features.pipes.PipeResource;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;

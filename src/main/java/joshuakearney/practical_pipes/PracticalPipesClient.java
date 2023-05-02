@@ -1,13 +1,13 @@
-package joshuakearney.practicalpipes;
+package joshuakearney.practical_pipes;
 
-import joshuakearney.practicalpipes.features.tank.TankRenderer;
+import joshuakearney.practical_pipes.features.tank.TankRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import joshuakearney.practicalpipes.features.pipes.item.ItemPipeRenderer;
+import joshuakearney.practical_pipes.features.pipes.item.ItemPipeRenderer;
 
 @Environment(EnvType.CLIENT)
 public class PracticalPipesClient implements ClientModInitializer {

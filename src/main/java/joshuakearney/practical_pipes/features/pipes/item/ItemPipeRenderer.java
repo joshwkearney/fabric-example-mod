@@ -1,6 +1,6 @@
-package joshuakearney.practicalpipes.features.pipes.item;
+package joshuakearney.practical_pipes.features.pipes.item;
 
-import joshuakearney.practicalpipes.features.pipes.PipeBlockEntity;
+import joshuakearney.practical_pipes.features.pipes.PipeBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

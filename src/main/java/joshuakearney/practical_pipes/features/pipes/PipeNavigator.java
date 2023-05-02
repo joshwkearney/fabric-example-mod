@@ -1,7 +1,7 @@
-package joshuakearney.practicalpipes.features.pipes;
+package joshuakearney.practical_pipes.features.pipes;
 
-import joshuakearney.practicalpipes.features.pipes.item.ItemExtractorBlock;
-import joshuakearney.practicalpipes.features.pipes.item.ItemExtractorBlockEntity;
+import joshuakearney.practical_pipes.features.pipes.item.ItemExtractorBlock;
+import joshuakearney.practical_pipes.features.pipes.item.ItemExtractorBlockEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;

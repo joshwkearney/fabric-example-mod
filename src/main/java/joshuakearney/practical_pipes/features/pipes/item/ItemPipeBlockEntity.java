@@ -1,7 +1,7 @@
-package joshuakearney.practicalpipes.features.pipes.item;
+package joshuakearney.practical_pipes.features.pipes.item;
 
-import joshuakearney.practicalpipes.PracticalPipes;
-import joshuakearney.practicalpipes.features.pipes.PipeBlockEntity;
+import joshuakearney.practical_pipes.PracticalPipes;
+import joshuakearney.practical_pipes.features.pipes.PipeBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 

@@ -1,6 +1,6 @@
-package joshuakearney.practicalpipes.features.pipes.item;
+package joshuakearney.practical_pipes.features.pipes.item;
 
-import joshuakearney.practicalpipes.features.pipes.PipeBlock;
+import joshuakearney.practical_pipes.features.pipes.PipeBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-import static joshuakearney.practicalpipes.PracticalPipes.EXTRACTOR_PIPE_BLOCK_ENTITY;
+import static joshuakearney.practical_pipes.PracticalPipes.EXTRACTOR_PIPE_BLOCK_ENTITY;
 
 public class ItemExtractorBlock extends PipeBlock<ItemExtractorBlockEntity> {
     public static final DirectionProperty FACING = Properties.FACING;
