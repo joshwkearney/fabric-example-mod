@@ -30,7 +30,7 @@ public class PipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
 
 
     public PipeRenderer(BlockEntityRendererFactory.Context ctx) {}
-
+    
     @Override
     public void render(PipeBlockEntity blockEntity, float tickDelta, MatrixStack matrices,
                        VertexConsumerProvider vertexConsumers, int light, int overlay) {
@@ -96,7 +96,13 @@ public class PipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
             var renderLoc = resourceRenderLocations.get(resource.id);
             var correctLoc = blockEntity.getPos().toCenterPos().add(relativePos);
             var diff = correctLoc.subtract(renderLoc);
-            var delta = diff.multiply(0.05);
+
+            // We are only going to follow the correct path a little ways. This has the effect
+            // of smoothing out the animation if we miss a frame, and it gives us a curving
+            // motion on corners. Because we are calculating the position from the client side
+            // we need to take average fps into account to get the same look at all framerates.
+            // The formula used here was calculated empirically
+            var delta = diff.multiply(0.3);
 
             var newRelativePos = renderLoc
                     .add(delta)
@@ -107,12 +113,12 @@ public class PipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
             matrices.translate(newRelativePos.x, newRelativePos.y, newRelativePos.z);
 
 
-            //matrices.scale(4f / 16, 4f / 16, 4f / 16);
+            matrices.scale(4f / 16, 4f / 16, 4f / 16);
 
             // Rotate the item
             //matrices.multiply(
             //        RotationAxis.POSITIVE_Y.rotationDegrees(
-            //                (blockEntity.getWorld().getTime() + tickDelta) * 4));
+            //                (blockEntity.getWorld().getTime() + averageDeltaTick) * 4));
 
             MinecraftClient
                     .getInstance()
