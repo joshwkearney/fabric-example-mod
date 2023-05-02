@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "examplemod:block/pipe",
-		"1": "examplemod:block/extractor_pipe",
-		"particle": "examplemod:block/extractor_pipe"
+		"0": "practical_pipes:block/pipe",
+		"1": "practical_pipes:block/extractor_pipe",
+		"particle": "practical_pipes:block/extractor_pipe"
 	},
 	"elements": [
 		{

@@ -18,7 +18,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class PracticalPipes implements ModInitializer {
-	public static final String MODID = "examplemod";
+	public static final String MODID = "practical_pipes";
 
 	public static final Block TANK_BLOCK = new TankBlock();
 

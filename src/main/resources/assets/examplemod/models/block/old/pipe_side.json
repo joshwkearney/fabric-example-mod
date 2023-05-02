@@ -1,6 +1,0 @@
-{
-  "parent": "examplemod:block/pipe_side_template",
-  "textures": {
-    "pipe": "examplemod:block/pipe"
-  }
-}

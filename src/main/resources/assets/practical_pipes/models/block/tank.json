@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "practical_pipes:block/tank_side",
+    "up": "practical_pipes:block/tank_top",
+    "down": "practical_pipes:block/tank_top",
+    "north": "practical_pipes:block/tank_side",
+    "south": "practical_pipes:block/tank_side",
+    "east": "practical_pipes:block/tank_side",
+    "west": "practical_pipes:block/tank_side"
+  }
+}
+
