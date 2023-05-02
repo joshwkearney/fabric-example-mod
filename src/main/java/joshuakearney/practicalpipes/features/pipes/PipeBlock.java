@@ -1,4 +1,4 @@
-package net.fabricmc.example.pipes;
+package joshuakearney.practicalpipes.features.pipes;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -22,10 +22,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
-import static net.fabricmc.example.ExampleMod.PIPE_BLOCK_ENTITY;
-
-public class PipeBlock extends BlockWithEntity implements BlockEntityProvider {
+public abstract class PipeBlock<T extends PipeBlockEntity> extends BlockWithEntity implements BlockEntityProvider {
     public static final BooleanProperty NORTH = BooleanProperty.of("north");
     public static final BooleanProperty EAST = BooleanProperty.of("east");
     public static final BooleanProperty SOUTH = BooleanProperty.of("south");
@@ -44,12 +43,16 @@ public class PipeBlock extends BlockWithEntity implements BlockEntityProvider {
             }
     );
 
-    public PipeBlock() {
+    private Supplier<BlockEntityType<T>> entityTypeSupplier;
+
+    public PipeBlock(Supplier<BlockEntityType<T>> entityType) {
         super(FabricBlockSettings
                 .of(Material.GLASS)
                 .strength(0.3F, 0.3F)
                 .sounds(BlockSoundGroup.GLASS)
                 .nonOpaque());
+
+        this.entityTypeSupplier = entityType;
 
         this.setDefaultState(this.getStateManager()
                 .getDefaultState()
@@ -90,9 +93,9 @@ public class PipeBlock extends BlockWithEntity implements BlockEntityProvider {
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState newState,
                                                 WorldAccess world, BlockPos pos, BlockPos posFrom) {
-        //PullerPipeBlockEntity.updatePullerPipes(world, pos, direction, new HashSet<>());
 
         var value = isConnectable(world, posFrom, direction.getOpposite());
+
         return state.with(getProperty(direction), value);
     }
 
@@ -112,7 +115,7 @@ public class PipeBlock extends BlockWithEntity implements BlockEntityProvider {
     }
 
     protected boolean isConnectable(WorldAccess world, BlockPos pos, Direction dir) {
-        // TODO find a better way to detect connectable surfaces
+        // TODO: find a better way to detect connectable surfaces
 
         var block = world.getBlockState(pos).getBlock();
         var blockEntity = world.getBlockEntity(pos);
@@ -126,12 +129,12 @@ public class PipeBlock extends BlockWithEntity implements BlockEntityProvider {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new PipeBlockEntity(pos, state);
+        return this.entityTypeSupplier.get().instantiate(pos, state);
     }
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return this.checkType(type, PIPE_BLOCK_ENTITY, (world2, pos, state2, entity) -> {
+        return this.checkType(type, this.entityTypeSupplier.get(), (world2, pos, state2, entity) -> {
             if (world.isClient) {
                 entity.tickClient();
             }

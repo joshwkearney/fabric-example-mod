@@ -1,13 +1,15 @@
-package net.fabricmc.example.pipes;
+package joshuakearney.practicalpipes.features.pipes.item;
 
+import joshuakearney.practicalpipes.PracticalPipes;
+import joshuakearney.practicalpipes.features.pipes.PipeBlockEntity;
+import joshuakearney.practicalpipes.features.pipes.PipeNavigator;
+import joshuakearney.practicalpipes.features.pipes.PipeResource;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 
-import static net.fabricmc.example.ExampleMod.EXTRACTOR_PIPE_BLOCK_ENTITY;
-
-public class ExtractorPipeBlockEntity extends PipeBlockEntity {
+public class ItemExtractorBlockEntity extends PipeBlockEntity {
     private final int PULL_FREQUENCY = 2;
     private final int DELAY_TICKS = 20 / PULL_FREQUENCY;
 
@@ -15,8 +17,8 @@ public class ExtractorPipeBlockEntity extends PipeBlockEntity {
 
     private int counter = 0;
 
-    public ExtractorPipeBlockEntity(BlockPos pos, BlockState state) {
-        super(EXTRACTOR_PIPE_BLOCK_ENTITY, pos, state);
+    public ItemExtractorBlockEntity(BlockPos pos, BlockState state) {
+        super(PracticalPipes.EXTRACTOR_PIPE_BLOCK_ENTITY, pos, state);
     }
 
 
@@ -32,7 +34,7 @@ public class ExtractorPipeBlockEntity extends PipeBlockEntity {
             counter = DELAY_TICKS;
         }
 
-        var sourceDir = this.world.getBlockState(this.pos).get(ExtractorBlock.FACING);
+        var sourceDir = this.world.getBlockState(this.pos).get(ItemExtractorBlock.FACING);
         var sourcePos = this.pos.offset(sourceDir);
         var sourceEntity = this.world.getBlockEntity(sourcePos);
 

@@ -1,4 +1,4 @@
-package net.fabricmc.example;
+package joshuakearney.practicalpipes.features.tank;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil;

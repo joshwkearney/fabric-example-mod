@@ -1,10 +1,8 @@
-package net.fabricmc.example.pipes;
+package joshuakearney.practicalpipes.features.pipes.item;
 
+import joshuakearney.practicalpipes.features.pipes.PipeBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.example.pipes.PipeBlockEntity;
-import net.fabricmc.example.render.fluid.FluidRenderFace;
-import net.fabricmc.example.render.fluid.FluidVolumeRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
@@ -13,23 +11,19 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
 @Environment(EnvType.CLIENT)
-public class PipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
+public class ItemPipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
     private static ItemStack stack = new ItemStack(Items.JUKEBOX, 1);
 
     private static Map<Integer, Vec3d> resourceRenderLocations = new HashMap<>();
 
 
-    public PipeRenderer(BlockEntityRendererFactory.Context ctx) {}
+    public ItemPipeRenderer(BlockEntityRendererFactory.Context ctx) {}
     
     @Override
     public void render(PipeBlockEntity blockEntity, float tickDelta, MatrixStack matrices,

@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-package net.fabricmc.example.pipes;
+package joshuakearney.practicalpipes.features.pipes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.Direction;

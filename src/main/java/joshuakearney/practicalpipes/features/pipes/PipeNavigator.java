@@ -1,13 +1,12 @@
-package net.fabricmc.example.pipes;
+package joshuakearney.practicalpipes.features.pipes;
 
-import com.google.common.collect.ImmutableList;
-import net.minecraft.block.Block;
+import joshuakearney.practicalpipes.features.pipes.item.ItemExtractorBlock;
+import joshuakearney.practicalpipes.features.pipes.item.ItemExtractorBlockEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-import java.nio.channels.Pipe;
 import java.util.*;
 import java.util.function.Function;
 
@@ -118,8 +117,8 @@ public class PipeNavigator {
             }
             else if (target instanceof Inventory inv) {
                 // If this is an extractor pipe, possibly ignore the connection
-                if (world.getBlockEntity(pipePos) instanceof ExtractorPipeBlockEntity) {
-                    if (world.getBlockState(pipePos).get(ExtractorBlock.FACING) == dir) {
+                if (world.getBlockEntity(pipePos) instanceof ItemExtractorBlockEntity) {
+                    if (world.getBlockState(pipePos).get(ItemExtractorBlock.FACING) == dir) {
                         continue;
                     }
                 }

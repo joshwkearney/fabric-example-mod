@@ -1,5 +1,6 @@
-package net.fabricmc.example.pipes;
+package joshuakearney.practicalpipes.features.pipes.item;
 
+import joshuakearney.practicalpipes.features.pipes.PipeBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -14,13 +15,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-import static net.fabricmc.example.ExampleMod.EXTRACTOR_PIPE_BLOCK_ENTITY;
+import static joshuakearney.practicalpipes.PracticalPipes.EXTRACTOR_PIPE_BLOCK_ENTITY;
 
-public class ExtractorBlock extends PipeBlock {
+public class ItemExtractorBlock extends PipeBlock<ItemExtractorBlockEntity> {
     public static final DirectionProperty FACING = Properties.FACING;
 
-    public ExtractorBlock() {
-        super();
+    public ItemExtractorBlock() {
+        super(() -> EXTRACTOR_PIPE_BLOCK_ENTITY);
 
         this.setDefaultState(
                 this.getStateManager()
@@ -53,7 +54,7 @@ public class ExtractorBlock extends PipeBlock {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new ExtractorPipeBlockEntity(pos, state);
+        return new ItemExtractorBlockEntity(pos, state);
     }
 
     @Override

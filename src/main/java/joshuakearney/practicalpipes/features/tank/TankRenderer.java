@@ -1,15 +1,13 @@
-package net.fabricmc.example;
+package joshuakearney.practicalpipes.features.tank;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.example.render.fluid.FluidRenderFace;
-import net.fabricmc.example.render.fluid.FluidVolumeRenderer;
+import joshuakearney.practicalpipes.render.FluidRenderFace;
+import joshuakearney.practicalpipes.render.FluidVolumeRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.math.Direction;
 
 import java.util.EnumSet;

@@ -1,13 +1,10 @@
-package net.fabricmc.example.pipes;
+package joshuakearney.practicalpipes.features.pipes;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 
 public class PipeResource {
     public ItemStack items = ItemStack.EMPTY;

@@ -1,4 +1,4 @@
-package net.fabricmc.example.pipes;
+package joshuakearney.practicalpipes.features.pipes;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -17,16 +17,8 @@ import net.minecraft.util.math.Direction;
 
 import java.util.*;
 
-import static net.fabricmc.example.ExampleMod.PIPE_BLOCK_ENTITY;
-
 public class PipeBlockEntity extends BlockEntity {
-    private static final int MOVE_TIME = 20;
-
     private final Set<PipeResource> resources = new HashSet<>();
-
-    public PipeBlockEntity(BlockPos pos, BlockState state) {
-        super(PIPE_BLOCK_ENTITY, pos, state);
-    }
 
     public PipeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);

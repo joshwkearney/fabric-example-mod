@@ -1,5 +1,6 @@
-package net.fabricmc.example;
+package joshuakearney.practicalpipes.features.tank;
 
+import joshuakearney.practicalpipes.PracticalPipes;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
@@ -12,13 +13,11 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
 
-import static net.fabricmc.example.ExampleMod.TANK_BLOCK_ENTITY;
-
 public class TankBlockEntity extends BlockEntity  {
     public final SingleVariantStorage<FluidVariant> fluid;
 
     public TankBlockEntity(BlockPos pos, BlockState state) {
-        super(TANK_BLOCK_ENTITY, pos, state);
+        super(PracticalPipes.TANK_BLOCK_ENTITY, pos, state);
 
         this.fluid = new TankFluidStorage(pos, state) {
             @Override
