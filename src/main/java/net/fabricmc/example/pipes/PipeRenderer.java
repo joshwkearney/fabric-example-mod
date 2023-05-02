@@ -35,58 +35,30 @@ public class PipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
     public void render(PipeBlockEntity blockEntity, float tickDelta, MatrixStack matrices,
                        VertexConsumerProvider vertexConsumers, int light, int overlay) {
 
-        final var itemSize = 4d / 16;
-
         if (!blockEntity.hasResources()) {
             return;
         }
 
         matrices.push();
-
-        // Calculate the current offset in the y value
-        //double offset = Math.sin((blockEntity.getWorld().getTime() + tickDelta) / 8.0) / 4.0;
-
         matrices.translate(0.5, 0.5, 0.5);
 
         for (var resource : blockEntity.getResources()) {
             matrices.push();
 
-            Vec3d relativePos = null;
+            // Get the direction this item is supposed to be travelling
+            var dir = (resource.ticksInPipe < resource.ticksPerPipe / 2)
+                    ? resource.fromDirection.getOpposite()
+                    : resource.toDirection;
 
-            if (resource.ticksLeftInPipe >= 10) {
-                var dirVec = resource.fromDirection.getVector();
-                relativePos = new Vec3d(dirVec.getX(), dirVec.getY(), dirVec.getZ());
+            // Get a vector pointing from the center of our block to the edge
+            // in the correct direction, scaled by the time this item has been
+            // in the pipe
+            var dirVec = dir.getVector();
+            var relativePos = new Vec3d(dirVec.getX(), dirVec.getY(), dirVec.getZ())
+                    .multiply(0.5)
+                    .multiply((2*(resource.ticksInPipe + tickDelta) - resource.ticksPerPipe) / resource.ticksPerPipe);
 
-                //pos = pos.multiply(0.5);
-                relativePos = relativePos.multiply(
-                        relativePos.length() * (resource.ticksLeftInPipe - tickDelta - 10) / 10);
-
-                // pos = new Vec3d(
-                //         Math.abs(pos.x) > 1 ? Math.signum(pos.x) : pos.x,
-                //         Math.abs(pos.y) > 1 ? Math.signum(pos.y) : pos.y,
-                //        Math.abs(pos.z) > 1 ? Math.signum(pos.z) : pos.z);
-
-                relativePos = relativePos.multiply(0.5);
-            }
-            else {
-                if (resource.ticksLeftInPipe == 0) {
-                    var x = 45;
-                }
-
-                var dirVec = resource.toDirection.getVector();
-                relativePos = new Vec3d(dirVec.getX(), dirVec.getY(), dirVec.getZ());
-
-                relativePos = relativePos.multiply(
-                        relativePos.length() * (10 - resource.ticksLeftInPipe + tickDelta) / 10);
-
-                //pos = new Vec3d(
-                //       Math.abs(pos.x) > 1 ? Math.signum(pos.x) : pos.x,
-                //       Math.abs(pos.y) > 1 ? Math.signum(pos.y) : pos.y,
-                //       Math.abs(pos.z) > 1 ? Math.signum(pos.z) : pos.z);
-
-                relativePos = relativePos.multiply(0.5);
-            }
-
+            // Make sure there is a render location for this item
             if (!resourceRenderLocations.containsKey(resource.id)) {
                 resourceRenderLocations.put(
                         resource.id,
@@ -104,21 +76,17 @@ public class PipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
             // The formula used here was calculated empirically
             var delta = diff.multiply(0.3);
 
+            // Calculate a new position relative to the center of this block, but
+            // based on the previous position and not where the item is supposed to
+            // be. This smoothes out the motion
             var newRelativePos = renderLoc
                     .add(delta)
                     .subtract(blockEntity.getPos().toCenterPos());
 
+            // Update the location
             resourceRenderLocations.put(resource.id, renderLoc.add(delta));
-
             matrices.translate(newRelativePos.x, newRelativePos.y, newRelativePos.z);
-
-
             matrices.scale(4f / 16, 4f / 16, 4f / 16);
-
-            // Rotate the item
-            //matrices.multiply(
-            //        RotationAxis.POSITIVE_Y.rotationDegrees(
-            //                (blockEntity.getWorld().getTime() + averageDeltaTick) * 4));
 
             MinecraftClient
                     .getInstance()
@@ -136,11 +104,6 @@ public class PipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
             matrices.pop();
         }
 
-        // Move the item
-        //matrices..translate(0.5, (8 - 4/2 - 1) / 16d, 0.5);
-
-
-        // Mandatory call after GL calls
         matrices.pop();
     }
 }

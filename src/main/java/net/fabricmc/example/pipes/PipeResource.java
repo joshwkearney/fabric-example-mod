@@ -20,13 +20,14 @@ public class PipeResource {
 
     public int id = 0;
 
-    // This is used by both the client and server but is not synched over the network because that would lead
-    // to too many updates, and the client and server can track ticks independently
-    public int ticksLeftInPipe = 0;
+    public int ticksPerPipe = 0;
+
+    public int ticksInPipe = 0;
 
     public static PipeResource fromNbt(NbtCompound tag) {
         var items = ItemStack.EMPTY;
-        var ticks = 0;
+        var ticksPerPipe = 0;
+        var ticksInPipe = 0;
         var dest = new BlockPos(0, 0, 0);
         var fromDir = Direction.NORTH;
         var toDir = Direction.SOUTH;
@@ -36,8 +37,12 @@ public class PipeResource {
             items = ItemStack.fromNbt(tag.getCompound("items"));
         }
 
-        if (tag.contains("ticksLeft")) {
-            ticks = tag.getInt("ticksLeft");
+        if (tag.contains("ticksPerPipe")) {
+            ticksPerPipe = tag.getInt("ticksPerPipe");
+        }
+
+        if (tag.contains("ticksInPipe")) {
+            ticksInPipe = tag.getInt("ticksInPipe");
         }
 
         if (tag.contains("destination")) {
@@ -56,12 +61,13 @@ public class PipeResource {
             id = tag.getInt("id");
         }
 
-        return new PipeResource(items, ticks, dest, fromDir, toDir, id);
+        return new PipeResource(items, ticksPerPipe, ticksInPipe, dest, fromDir, toDir, id);
     }
 
-    public PipeResource(ItemStack items, int ticks, BlockPos dest, Direction fromDir, Direction toDir, int id) {
+    public PipeResource(ItemStack items, int ticksPerPipe, int ticksInPipe, BlockPos dest, Direction fromDir, Direction toDir, int id) {
         this.items = items;
-        this.ticksLeftInPipe = ticks;
+        this.ticksPerPipe = ticksPerPipe;
+        this.ticksInPipe = ticksInPipe;
         this.destination = dest;
         this.fromDirection = fromDir;
         this.toDirection = toDir;
@@ -74,7 +80,8 @@ public class PipeResource {
 
         this.items.writeNbt(itemsTag);
         tag.put("items", itemsTag);
-        tag.putInt("ticksLeft", this.ticksLeftInPipe);
+        tag.putInt("ticksPerPipe", this.ticksPerPipe);
+        tag.putInt("ticksInPipe", this.ticksInPipe);
         tag.put("destination", NbtHelper.fromBlockPos(this.destination));
         tag.putInt("fromDirection", this.fromDirection.getId());
         tag.putInt("toDirection", this.toDirection.getId());

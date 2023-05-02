@@ -50,7 +50,7 @@ public class ExtractorPipeBlockEntity extends PipeBlockEntity {
             return;
         }
 
-        var resource = new PipeResource(stack, 20, dest, null, null, idCounter++);
+        var resource = new PipeResource(stack, 20, 0, dest, null, null, idCounter++);
         this.addResource(sourcePos, resource);
     }
 

@@ -37,6 +37,8 @@ public class PipeBlockEntity extends BlockEntity {
     public boolean hasResources() { return !this.resources.isEmpty(); }
 
     public void addResource(BlockPos previousPos, PipeResource resource) {
+        resource.ticksInPipe = 0;
+
         // Calculate the new from and to directions
         var from = Direction.fromVector(this.getPos().subtract(previousPos)).getOpposite();
 
@@ -64,9 +66,9 @@ public class PipeBlockEntity extends BlockEntity {
         var toRemove = new HashSet<PipeResource>();
 
         for (var resource : this.resources) {
-            resource.ticksLeftInPipe--;
+            resource.ticksInPipe++;
 
-            if (resource.ticksLeftInPipe > 0) {
+            if (resource.ticksInPipe < resource.ticksPerPipe) {
                 continue;
             }
 
@@ -81,9 +83,6 @@ public class PipeBlockEntity extends BlockEntity {
             var entity = this.getWorld().getBlockEntity(nextPos);
 
             if (entity instanceof PipeBlockEntity pipe) {
-                // Reset the traversal time for the new pipe
-                resource.ticksLeftInPipe = MOVE_TIME;
-
                 // Add this resource to the next pipe and remove it from ours
                 toRemove.add(resource);
                 pipe.addResource(this.getPos(), resource);
@@ -103,7 +102,7 @@ public class PipeBlockEntity extends BlockEntity {
     @Environment(EnvType.CLIENT)
     public void tickClient() {
         for (var resource : this.resources) {
-            resource.ticksLeftInPipe--;
+            resource.ticksInPipe++;
         }
     }
 
@@ -148,6 +147,7 @@ public class PipeBlockEntity extends BlockEntity {
 
         super.writeNbt(tag);
     }
+
     @Override
     public void readNbt(NbtCompound tag) {
         super.readNbt(tag);
@@ -156,8 +156,9 @@ public class PipeBlockEntity extends BlockEntity {
         int size = tag.getInt("resource_size");
         for (int i = 0; i < size; i++) {
             var resourceTag = tag.getCompound("resource_" + i);
+            var resource = PipeResource.fromNbt(resourceTag);
 
-            this.resources.add(PipeResource.fromNbt(resourceTag));
+            this.resources.add(resource);
         }
     }
 
