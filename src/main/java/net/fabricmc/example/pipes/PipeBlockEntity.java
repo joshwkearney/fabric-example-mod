@@ -1,5 +1,7 @@
 package net.fabricmc.example.pipes;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -11,6 +13,7 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 
 import java.util.*;
 
@@ -19,7 +22,7 @@ import static net.fabricmc.example.ExampleMod.PIPE_BLOCK_ENTITY;
 public class PipeBlockEntity extends BlockEntity {
     private static final int MOVE_TIME = 20;
 
-    public final Set<PipeResource> resources = new HashSet<>();
+    private final Set<PipeResource> resources = new HashSet<>();
 
     public PipeBlockEntity(BlockPos pos, BlockState state) {
         super(PIPE_BLOCK_ENTITY, pos, state);
@@ -29,7 +32,31 @@ public class PipeBlockEntity extends BlockEntity {
         super(type, pos, state);
     }
 
-    public void tick() {
+    public Iterable<PipeResource> getResources() { return this.resources; }
+
+    public boolean hasResources() { return !this.resources.isEmpty(); }
+
+    public void addResource(BlockPos previousPos, PipeResource resource) {
+        // Calculate the new from and to directions
+        var from = Direction.fromVector(this.getPos().subtract(previousPos)).getOpposite();
+
+        // Get the next pipe to move to if we are going to reach our destination
+        var nextPos = PipeNavigator.findNextPipe(this.getPos(), resource.destination, this.getWorld());
+        if (nextPos == null) {
+            // TODO: Drop the item
+            return;
+        }
+
+        var to = Direction.fromVector(this.getPos().subtract(nextPos)).getOpposite();
+
+        resource.fromDirection = from;
+        resource.toDirection = to;
+
+        this.resources.add(resource);
+        this.markDirty();
+    }
+
+    public void tickServer() {
         if (this.resources.isEmpty()) {
             return;
         }
@@ -59,8 +86,7 @@ public class PipeBlockEntity extends BlockEntity {
 
                 // Add this resource to the next pipe and remove it from ours
                 toRemove.add(resource);
-                pipe.resources.add(resource);
-                pipe.markDirty();
+                pipe.addResource(this.getPos(), resource);
             }
             else if (entity instanceof Inventory dest) {
                 toRemove.add(resource);
@@ -71,6 +97,13 @@ public class PipeBlockEntity extends BlockEntity {
         if (!toRemove.isEmpty()) {
             this.resources.removeAll(toRemove);
             this.markDirty();
+        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    public void tickClient() {
+        for (var resource : this.resources) {
+            resource.ticksLeftInPipe--;
         }
     }
 

@@ -1,24 +1,17 @@
 package net.fabricmc.example.pipes;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
-
-import java.util.*;
 
 import static net.fabricmc.example.ExampleMod.EXTRACTOR_PIPE_BLOCK_ENTITY;
-import static net.fabricmc.example.ExampleMod.PIPE_BLOCK_ENTITY;
 
 public class ExtractorPipeBlockEntity extends PipeBlockEntity {
     private final int PULL_FREQUENCY = 2;
     private final int DELAY_TICKS = 20 / PULL_FREQUENCY;
+
+    private static int idCounter = 0;
 
     private int counter = 0;
 
@@ -28,8 +21,8 @@ public class ExtractorPipeBlockEntity extends PipeBlockEntity {
 
 
     @Override
-    public void tick() {
-        super.tick();
+    public void tickServer() {
+        super.tickServer();
 
         if (counter > 0) {
             counter--;
@@ -40,7 +33,8 @@ public class ExtractorPipeBlockEntity extends PipeBlockEntity {
         }
 
         var sourceDir = this.world.getBlockState(this.pos).get(ExtractorBlock.FACING);
-        var sourceEntity = this.world.getBlockEntity(this.pos.offset(sourceDir));
+        var sourcePos = this.pos.offset(sourceDir);
+        var sourceEntity = this.world.getBlockEntity(sourcePos);
 
         if (sourceEntity == null || !(sourceEntity instanceof Inventory sourceInv)) {
             return;
@@ -56,9 +50,8 @@ public class ExtractorPipeBlockEntity extends PipeBlockEntity {
             return;
         }
 
-        var resource = new PipeResource(stack, 20, dest);
-        this.resources.add(resource);
-        this.markDirty();
+        var resource = new PipeResource(stack, 20, dest, null, null, idCounter++);
+        this.addResource(sourcePos, resource);
     }
 
     private ItemStack remove(Inventory source) {

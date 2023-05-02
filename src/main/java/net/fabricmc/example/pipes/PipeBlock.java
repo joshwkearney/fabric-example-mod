@@ -21,10 +21,8 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
-import static net.fabricmc.example.ExampleMod.EXTRACTOR_PIPE_BLOCK_ENTITY;
 import static net.fabricmc.example.ExampleMod.PIPE_BLOCK_ENTITY;
 
 public class PipeBlock extends BlockWithEntity implements BlockEntityProvider {
@@ -134,8 +132,11 @@ public class PipeBlock extends BlockWithEntity implements BlockEntityProvider {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return this.checkType(type, PIPE_BLOCK_ENTITY, (world2, pos, state2, entity) -> {
-            if (!world.isClient) {
-                entity.tick();
+            if (world.isClient) {
+                entity.tickClient();
+            }
+            else {
+                entity.tickServer();
             }
         });
     }

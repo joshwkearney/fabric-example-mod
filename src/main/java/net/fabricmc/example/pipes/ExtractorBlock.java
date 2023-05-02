@@ -15,7 +15,6 @@ import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 import static net.fabricmc.example.ExampleMod.EXTRACTOR_PIPE_BLOCK_ENTITY;
-import static net.fabricmc.example.ExampleMod.PIPE_BLOCK_ENTITY;
 
 public class ExtractorBlock extends PipeBlock {
     public static final DirectionProperty FACING = Properties.FACING;
@@ -60,8 +59,11 @@ public class ExtractorBlock extends PipeBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return this.checkType(type, EXTRACTOR_PIPE_BLOCK_ENTITY, (world2, pos, state2, entity) -> {
-            if (!world.isClient) {
-                entity.tick();
+            if (world.isClient) {
+                entity.tickClient();
+            }
+            else {
+                entity.tickServer();
             }
         });
     }

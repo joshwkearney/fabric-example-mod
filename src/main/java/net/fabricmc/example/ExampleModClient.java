@@ -1,6 +1,8 @@
 package net.fabricmc.example;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.minecraft.client.render.RenderLayer;
@@ -9,6 +11,7 @@ import net.fabricmc.example.pipes.PipeRenderer;
 
 import static net.fabricmc.example.ExampleMod.*;
 
+@Environment(EnvType.CLIENT)
 public class ExampleModClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
