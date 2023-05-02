@@ -3,6 +3,8 @@ package net.fabricmc.example.pipes;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.sound.BlockSoundGroup;
@@ -22,7 +24,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-public class PipeBlock extends Block implements BlockEntityProvider {
+import static net.fabricmc.example.ExampleMod.EXTRACTOR_PIPE_BLOCK_ENTITY;
+import static net.fabricmc.example.ExampleMod.PIPE_BLOCK_ENTITY;
+
+public class PipeBlock extends BlockWithEntity implements BlockEntityProvider {
     public static final BooleanProperty NORTH = BooleanProperty.of("north");
     public static final BooleanProperty EAST = BooleanProperty.of("east");
     public static final BooleanProperty SOUTH = BooleanProperty.of("south");
@@ -56,6 +61,11 @@ public class PipeBlock extends Block implements BlockEntityProvider {
                 .with(WEST, false)
                 .with(UP, false)
                 .with(DOWN, false));
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 
     public Property<Boolean> getProperty(Direction facing) {
@@ -119,5 +129,14 @@ public class PipeBlock extends Block implements BlockEntityProvider {
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new PipeBlockEntity(pos, state);
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return this.checkType(type, PIPE_BLOCK_ENTITY, (world2, pos, state2, entity) -> {
+            if (!world.isClient) {
+                entity.tick();
+            }
+        });
     }
 }

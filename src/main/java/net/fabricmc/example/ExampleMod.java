@@ -2,7 +2,9 @@ package net.fabricmc.example;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.example.pipes.ExtractorBlock;
+import net.fabricmc.example.pipes.ExtractorPipeBlockEntity;
 import net.fabricmc.example.pipes.PipeBlock;
+import net.fabricmc.example.pipes.PipeBlockEntity;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -26,8 +28,12 @@ public class ExampleMod implements ModInitializer {
 			.create(TankBlockEntity::new, TANK_BLOCK)
 			.build();
 
-	public static final BlockEntityType<TankBlockEntity> PIPE_BLOCK_ENTITY = FabricBlockEntityTypeBuilder
-			.create(TankBlockEntity::new, PIPE_BLOCK)
+	public static final BlockEntityType<PipeBlockEntity> PIPE_BLOCK_ENTITY = FabricBlockEntityTypeBuilder
+			.create(PipeBlockEntity::new, PIPE_BLOCK)
+			.build();
+
+	public static final BlockEntityType<ExtractorPipeBlockEntity> EXTRACTOR_PIPE_BLOCK_ENTITY = FabricBlockEntityTypeBuilder
+			.create(ExtractorPipeBlockEntity::new, EXTRACTOR_PIPE_BLOCK)
 			.build();
 
 	@Override
@@ -60,6 +66,11 @@ public class ExampleMod implements ModInitializer {
 				Registries.BLOCK_ENTITY_TYPE,
 				new Identifier(MODID, "pipe_block_entity"),
 				PIPE_BLOCK_ENTITY);
+
+		Registry.register(
+				Registries.BLOCK_ENTITY_TYPE,
+				new Identifier(MODID, "extractor_pipe_block_entity"),
+				EXTRACTOR_PIPE_BLOCK_ENTITY);
 
 		FluidStorage.SIDED.registerForBlockEntity((myTank, direction) -> myTank.fluid, TANK_BLOCK_ENTITY);
 	}

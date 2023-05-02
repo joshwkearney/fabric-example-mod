@@ -51,7 +51,7 @@ public class TankBlockEntity extends BlockEntity  {
 
     @Override
     public NbtCompound toInitialChunkDataNbt() {
-        return createNbt();
+        return this.createNbt();
     }
 
     abstract class TankFluidStorage extends SingleVariantStorage<FluidVariant> {

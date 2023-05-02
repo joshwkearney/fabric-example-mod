@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.fabricmc.example.pipes.PipeRenderer;
 
 import static net.fabricmc.example.ExampleMod.*;
 
@@ -16,5 +17,6 @@ public class ExampleModClient implements ClientModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(EXTRACTOR_PIPE_BLOCK, RenderLayer.getCutout());
 
         BlockEntityRendererFactories.register(TANK_BLOCK_ENTITY, TankRenderer::new);
+        BlockEntityRendererFactories.register(PIPE_BLOCK_ENTITY, PipeRenderer::new);
     }
 }

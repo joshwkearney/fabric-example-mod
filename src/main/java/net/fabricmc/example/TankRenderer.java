@@ -16,8 +16,6 @@ import java.util.EnumSet;
 
 @Environment(EnvType.CLIENT)
 public class TankRenderer implements BlockEntityRenderer<TankBlockEntity> {
-    private static ItemStack stack = new ItemStack(Items.JUKEBOX, 1);
-
     public TankRenderer(BlockEntityRendererFactory.Context ctx) {}
 
     @Override
