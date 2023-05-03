@@ -1,41 +1,51 @@
 package joshuakearney.practical_pipes.features.pipes.item;
 
 import joshuakearney.practical_pipes.PracticalPipes;
-import joshuakearney.practical_pipes.features.pipes.PipeBlockEntity;
-import joshuakearney.practical_pipes.features.pipes.PipeConnection;
-import joshuakearney.practical_pipes.features.pipes.PipeNavigator;
-import joshuakearney.practical_pipes.features.pipes.PipeResource;
+import joshuakearney.practical_pipes.features.pipes.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemExtractorBlockEntity extends PipeBlockEntity {
-    private final int PULL_FREQUENCY = 2;
+    private final int PULL_FREQUENCY = 1;
     private final int DELAY_TICKS = 20 / PULL_FREQUENCY;
-
     private static int idCounter = 0;
-
-    private int counter = 0;
+    private int delayTickCounter = 0;
+    private int directionIndex = 0;
 
     public ItemExtractorBlockEntity(BlockPos pos, BlockState state) {
         super(PracticalPipes.EXTRACTOR_PIPE_BLOCK_ENTITY, pos, state);
     }
 
     @Override
+    public boolean canItemPassThrough(Direction dir) {
+        var state = this.getCachedState().get(PipeBlock.getConnectionProperty(dir));
+
+        // Don't let items pass back into the inventory we are extracting from. Extraction is one-way
+        return state != PipeConnection.External && super.canItemPassThrough(dir);
+    }
+
+    @Override
     public void tickServer() {
         super.tickServer();
 
-        /*if (counter > 0) {
-            counter--;
+        if (delayTickCounter > 0) {
+            delayTickCounter--;
             return;
         }
         else {
-            counter = DELAY_TICKS;
+            delayTickCounter = DELAY_TICKS;
         }
 
-        var sourceDir = this.world.getBlockState(this.pos).get(ItemExtractorBlock.FACING);
+        // Get the next direction
+        var sourceDir = this.getNextDirection();
+        if (sourceDir == null) {
+            return;
+        }
+
         var sourcePos = this.pos.offset(sourceDir);
         var sourceEntity = this.world.getBlockEntity(sourcePos);
 
@@ -54,7 +64,23 @@ public class ItemExtractorBlockEntity extends PipeBlockEntity {
         }
 
         var resource = new PipeResource(stack, 20, 0, dest, null, null, idCounter++);
-        this.addResource(sourcePos, resource);*/
+        this.addResource(sourcePos, resource);
+    }
+
+    @Nullable
+    private Direction getNextDirection() {
+        for (int i = 0; i < Direction.values().length; i++) {
+            this.directionIndex = (this.directionIndex + 1) % Direction.values().length;
+
+            var dir = Direction.values()[directionIndex];
+            var state = this.getCachedState().get(PipeBlock.getConnectionProperty(dir));
+
+            if (state == PipeConnection.External) {
+                return dir;
+            }
+        }
+
+        return null;
     }
 
     private ItemStack remove(Inventory source) {

@@ -29,7 +29,7 @@ public abstract class PipeBlock<T extends PipeBlockEntity> extends BlockWithEnti
     public static final PipeConnectionProperty UP = new PipeConnectionProperty("up");
     public static final PipeConnectionProperty DOWN = new PipeConnectionProperty("down");
 
-    public static final Map<Direction, PipeConnectionProperty> PROPERTY_MAP = Util.make(new HashMap<>(),
+    private static final Map<Direction, PipeConnectionProperty> PROPERTY_MAP = Util.make(new HashMap<>(),
             map -> {
                 map.put(Direction.NORTH, NORTH);
                 map.put(Direction.SOUTH, SOUTH);
@@ -39,6 +39,10 @@ public abstract class PipeBlock<T extends PipeBlockEntity> extends BlockWithEnti
                 map.put(Direction.DOWN, DOWN);
             }
     );
+
+    public static PipeConnectionProperty getConnectionProperty(Direction dir) {
+        return PROPERTY_MAP.get(dir);
+    }
 
     private Supplier<BlockEntityType<T>> entityTypeSupplier;
 

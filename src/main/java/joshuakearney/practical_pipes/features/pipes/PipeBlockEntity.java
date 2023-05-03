@@ -14,7 +14,6 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
 
 import java.util.*;
 
@@ -23,6 +22,12 @@ public abstract class PipeBlockEntity extends BlockEntity {
 
     public PipeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+    }
+
+    public boolean canItemPassThrough(Direction dir) {
+        var state = this.getCachedState().get(PipeBlock.getConnectionProperty(dir));
+
+        return state != PipeConnection.None;
     }
 
     public Iterable<PipeResource> getResources() { return this.resources; }

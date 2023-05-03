@@ -98,34 +98,16 @@ public class PipeNavigator {
     }
 
     private static Iterable<BlockPos> getAttachedPipesOrInventories(BlockPos pipePos, World world) {
-        // TODO: Redo all of this
-
         var result = new ArrayList<BlockPos>();
+        var entity = world.getBlockEntity(pipePos);
 
-        // Find connected blocks
+        if (entity == null || !(entity instanceof PipeBlockEntity pipe)) {
+            return result;
+        }
+
         for (var dir : Direction.values()) {
-            var target = world.getBlockEntity(pipePos.offset(dir));
-            if (target == null) {
+            if (!pipe.canItemPassThrough(dir)) {
                 continue;
-            }
-
-            if (target instanceof PipeBlockEntity) {
-                var prop = PipeBlock.PROPERTY_MAP.get(dir);
-
-                // We are not connected in this direction
-                if (world.getBlockState(pipePos).get(prop) == PipeConnection.None) {
-                    continue;
-                }
-            }
-            else if (target instanceof Inventory inv) {
-                // If this is an extractor pipe, possibly ignore the connection
-                if (world.getBlockEntity(pipePos) instanceof ItemExtractorBlockEntity) {
-                    var block = (ItemExtractorBlock)world.getBlockState(pipePos).getBlock();
-
-                    if (block.getConnection(world, pipePos, dir) != PipeConnection.Pipe) {
-                        continue;
-                    }
-                }
             }
 
             result.add(pipePos.offset(dir));
