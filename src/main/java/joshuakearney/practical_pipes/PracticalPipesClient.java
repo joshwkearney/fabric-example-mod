@@ -14,8 +14,8 @@ public class PracticalPipesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(PracticalPipes.TANK_BLOCK, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(PracticalPipes.PIPE_BLOCK, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(PracticalPipes.EXTRACTOR_PIPE_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(PracticalPipes.ITEM_PIPE_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(PracticalPipes.ITEM_EXTRACTOR, RenderLayer.getCutout());
 
         BlockEntityRendererFactories.register(PracticalPipes.TANK_BLOCK_ENTITY, TankRenderer::new);
         BlockEntityRendererFactories.register(PracticalPipes.ITEM_PIPE_BLOCK_ENTITY, ItemPipeRenderer::new);

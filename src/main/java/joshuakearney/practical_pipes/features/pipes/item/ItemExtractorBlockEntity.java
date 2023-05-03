@@ -17,7 +17,7 @@ public class ItemExtractorBlockEntity extends PipeBlockEntity {
     private int directionIndex = 0;
 
     public ItemExtractorBlockEntity(BlockPos pos, BlockState state) {
-        super(PracticalPipes.EXTRACTOR_PIPE_BLOCK_ENTITY, pos, state);
+        super(PracticalPipes.ITEM_EXTRACTOR_BLOCK_ENTITY_BLOCK_ENTITY_TYPE, pos, state);
     }
 
     @Override
