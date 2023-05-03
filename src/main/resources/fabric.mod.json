@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "practicalpipes",
+  "id": "practical_pipes",
   "version": "${version}",
 
   "name": "Practical Pipes",
@@ -19,10 +19,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "joshuakearney.practicalpipes.PracticalPipes"
+      "joshuakearney.practical_pipes.PracticalPipes"
     ],
     "client": [
-      "joshuakearney.practicalpipes.PracticalPipesClient"
+      "joshuakearney.practical_pipes.PracticalPipesClient"
     ]
   },
   "mixins": [ ],

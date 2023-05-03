@@ -98,6 +98,8 @@ public class PipeNavigator {
     }
 
     private static Iterable<BlockPos> getAttachedPipesOrInventories(BlockPos pipePos, World world) {
+        // TODO: Redo all of this
+
         var result = new ArrayList<BlockPos>();
 
         // Find connected blocks
@@ -108,17 +110,19 @@ public class PipeNavigator {
             }
 
             if (target instanceof PipeBlockEntity) {
-                var prop = PipeBlock.PROP_MAP.get(dir);
+                var prop = PipeBlock.PROPERTY_MAP.get(dir);
 
                 // We are not connected in this direction
-                if (!world.getBlockState(pipePos).get(prop).booleanValue()) {
+                if (world.getBlockState(pipePos).get(prop) == PipeConnection.None) {
                     continue;
                 }
             }
             else if (target instanceof Inventory inv) {
                 // If this is an extractor pipe, possibly ignore the connection
                 if (world.getBlockEntity(pipePos) instanceof ItemExtractorBlockEntity) {
-                    if (world.getBlockState(pipePos).get(ItemExtractorBlock.FACING) == dir) {
+                    var block = (ItemExtractorBlock)world.getBlockState(pipePos).getBlock();
+
+                    if (block.getConnection(world, pipePos, dir) != PipeConnection.Pipe) {
                         continue;
                     }
                 }

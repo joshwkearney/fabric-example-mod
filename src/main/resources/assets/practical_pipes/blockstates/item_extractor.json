@@ -1,0 +1,127 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "practical_pipes:block/pipes/item_extractor_center" }
+    },
+
+    {
+      "when": { "north": "none" },
+      "apply": { "model": "practical_pipes:block/pipes/item_extractor_port" }
+    },
+    {
+      "when": { "south": "none" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_port",
+        "y": 180
+      }
+    },
+    {
+      "when": { "east": "none" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_port",
+        "y": 90
+      }
+    },
+    {
+      "when": { "west": "none" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_port",
+        "y": 270
+      }
+    },
+    {
+      "when": { "up": "none" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_port",
+        "x": 270
+      }
+    },
+    {
+      "when": { "down": "none" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_port",
+        "x": 90
+      }
+    },
+
+    {
+      "when": { "north": "pipe" },
+      "apply": { "model": "practical_pipes:block/pipes/item_extractor_side" }
+    },
+    {
+      "when": { "east": "pipe" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_side",
+        "y": 90
+      }
+    },
+    {
+      "when": { "south": "pipe" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_side",
+        "y": 180
+      }
+    },
+    {
+      "when": { "west": "pipe" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_side",
+        "y": 270
+      }
+    },
+    {
+      "when": { "up": "pipe" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_side",
+        "x": 270
+      }
+    },
+    {
+      "when": { "down": "pipe" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_side",
+        "x": 90
+      }
+    },
+
+    {
+      "when": { "north": "external" },
+      "apply": { "model": "practical_pipes:block/pipes/item_extractor_side_external" }
+    },
+    {
+      "when": { "east": "external" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_side_external",
+        "y": 90
+      }
+    },
+    {
+      "when": { "south": "external" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_side_external",
+        "y": 180
+      }
+    },
+    {
+      "when": { "west": "external" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_side_external",
+        "y": 270
+      }
+    },
+    {
+      "when": { "up": "external" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_side_external",
+        "x": 270
+      }
+    },
+    {
+      "when": { "down": "external" },
+      "apply": {
+        "model": "practical_pipes:block/pipes/item_extractor_side_external",
+        "x": 90
+      }
+    }
+  ]
+}

@@ -1,3 +1,5 @@
 {
-  "block.practical_pipes.tank": "Tank"
+  "block.practical_pipes.tank": "Tank",
+  "block.practical_pipes.item_pipe": "Item Pipe",
+  "block.practical_pipes.item_extractor": "Item Extractor"
 }

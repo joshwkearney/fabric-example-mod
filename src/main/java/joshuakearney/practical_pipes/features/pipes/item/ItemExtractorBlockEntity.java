@@ -2,12 +2,14 @@ package joshuakearney.practical_pipes.features.pipes.item;
 
 import joshuakearney.practical_pipes.PracticalPipes;
 import joshuakearney.practical_pipes.features.pipes.PipeBlockEntity;
+import joshuakearney.practical_pipes.features.pipes.PipeConnection;
 import joshuakearney.practical_pipes.features.pipes.PipeNavigator;
 import joshuakearney.practical_pipes.features.pipes.PipeResource;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 
 public class ItemExtractorBlockEntity extends PipeBlockEntity {
     private final int PULL_FREQUENCY = 2;
@@ -21,12 +23,11 @@ public class ItemExtractorBlockEntity extends PipeBlockEntity {
         super(PracticalPipes.EXTRACTOR_PIPE_BLOCK_ENTITY, pos, state);
     }
 
-
     @Override
     public void tickServer() {
         super.tickServer();
 
-        if (counter > 0) {
+        /*if (counter > 0) {
             counter--;
             return;
         }
@@ -53,7 +54,7 @@ public class ItemExtractorBlockEntity extends PipeBlockEntity {
         }
 
         var resource = new PipeResource(stack, 20, 0, dest, null, null, idCounter++);
-        this.addResource(sourcePos, resource);
+        this.addResource(sourcePos, resource);*/
     }
 
     private ItemStack remove(Inventory source) {

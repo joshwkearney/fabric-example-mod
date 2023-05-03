@@ -1,11 +1,12 @@
 package joshuakearney.practical_pipes;
 
+import joshuakearney.practical_pipes.features.pipes.PipeBlock;
 import joshuakearney.practical_pipes.features.pipes.item.ItemExtractorBlock;
+import joshuakearney.practical_pipes.features.pipes.item.ItemPipeBlock;
 import joshuakearney.practical_pipes.features.tank.TankBlock;
 import joshuakearney.practical_pipes.features.tank.TankBlockEntity;
 import net.fabricmc.api.ModInitializer;
 import joshuakearney.practical_pipes.features.pipes.item.ItemExtractorBlockEntity;
-import joshuakearney.practical_pipes.features.pipes.item.ItemPipeBlock;
 import joshuakearney.practical_pipes.features.pipes.item.ItemPipeBlockEntity;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -41,8 +42,8 @@ public class PracticalPipes implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		Registry.register(Registries.BLOCK, new Identifier(MODID, "tank"), TANK_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(MODID, "pipe"), PIPE_BLOCK);
-		Registry.register(Registries.BLOCK, new Identifier(MODID, "extractor_pipe"), EXTRACTOR_PIPE_BLOCK);
+		Registry.register(Registries.BLOCK, new Identifier(MODID, "item_pipe"), PIPE_BLOCK);
+		Registry.register(Registries.BLOCK, new Identifier(MODID, "item_extractor"), EXTRACTOR_PIPE_BLOCK);
 
 		Registry.register(
 				Registries.ITEM,
@@ -51,12 +52,12 @@ public class PracticalPipes implements ModInitializer {
 
 		Registry.register(
 				Registries.ITEM,
-				new Identifier(MODID, "pipe"),
+				new Identifier(MODID, "item_pipe"),
 				new BlockItem(PIPE_BLOCK, new FabricItemSettings()));
 
 		Registry.register(
 				Registries.ITEM,
-				new Identifier(MODID, "extractor_pipe"),
+				new Identifier(MODID, "item_extractor"),
 				new BlockItem(EXTRACTOR_PIPE_BLOCK, new FabricItemSettings()));
 
 		Registry.register(

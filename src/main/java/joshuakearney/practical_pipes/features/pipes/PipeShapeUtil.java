@@ -53,7 +53,7 @@ public final class PipeShapeUtil {
 
         final List<VoxelShape> connections = new ArrayList<>();
         for (Direction dir : Direction.values()) {
-            if (state.get(PipeBlock.PROP_MAP.get(dir))) {
+            if (state.get(PipeBlock.PROPERTY_MAP.get(dir)) != PipeConnection.None) {
                 double[] mins = { INSET, INSET, INSET };
                 double[] maxs = { 1 - INSET, 1 - INSET, 1 - INSET };
                 int axis = dir.getAxis().ordinal();

@@ -1,0 +1,6 @@
+{
+  "parent": "practical_pipes:block/templates/utility_pipe_port",
+  "textures": {
+    "pipe_texture": "practical_pipes:block/copper_pipe"
+  }
+}

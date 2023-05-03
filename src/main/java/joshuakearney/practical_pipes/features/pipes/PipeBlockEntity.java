@@ -14,10 +14,11 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.WorldAccess;
 
 import java.util.*;
 
-public class PipeBlockEntity extends BlockEntity {
+public abstract class PipeBlockEntity extends BlockEntity {
     private final Set<PipeResource> resources = new HashSet<>();
 
     public PipeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
