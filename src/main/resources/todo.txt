@@ -1,14 +1,34 @@
-- Redo pipe.getOutlineShape(...)
-- Extractor pipes send items even if inventory is full. Items get deleted
-- Fix render ids getting saved to the world. Produces visual glitches on world load
-- Add correct behavior when pipes are broken
-- Add correct behavior when pipes are unloaded from the world
-- Cleanup render id memory leak in pipe renderer
-- Abstract pipes to not be item-specific
-- Add filter pipes (diamond)
-- Add valve pipes (quartz)
-- Add fluid pipes
-- Add energy pipes
+Finishing item pipes:
+    - Redo pipe.getOutlineShape(...)
+    - Extractor pipes send items even if inventory is full. Items get deleted
+    - Make sure extractor pipes don't see the source inventory as a valid destination
+    - Fix render ids getting saved to the world. Produces visual glitches on world load
+    - Add correct behavior when pipes are broken
+    - Add correct behavior when pipes are unloaded from the world
+    - Cleanup render id memory leak in pipe renderer
+    - Change item pipes to iron instead of copper
+    - Add item pipe recipe
+    - Add item pipe drops, including what is in the pipe
+
+Future:
+    - Abstract pipes to not be item-specific
+    - Add fluid pipes
+    - Add energy pipes
+    - Add filter pipes (diamond)
+    - Add valve pipes (quartz)
+
+Far future:
+    - Steel ingot: Used for machines, made my smelting iron (consistent with Ad Astra)
+    - Steam engine. Produces power from water and combustibles. Made of steel and copper
+    - Combustion engine: Produces power from liquid fuel. Optional oxidizer increases efficiency
+    - Electric heater for electric furnaces and ore processing
+    - Ore processing system
+    - Blunderbuss: A powerful, short range shotgun. Rounds made of any metal nugget
+    - Pump
+    - Quarry replacement
+    - Fuel refinery: Makes fuel from oil, mead from honey, and ethanol from mead
+    - Openblocks elevator replacement
+    - Research system
 
 DONE - Remove extra polys on pipe_side and utility_pipe_side
 DONE - Remove extra polys on item models
