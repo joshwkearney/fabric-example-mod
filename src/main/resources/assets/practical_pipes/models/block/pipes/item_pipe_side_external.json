@@ -1,6 +1,7 @@
 {
   "parent": "practical_pipes:block/templates/pipe_side_external",
   "textures": {
-    "pipe_texture": "practical_pipes:block/copper_pipe"
+	"pipe_texture": "practical_pipes:block/copper_pipe",
+    "pipe_specialty_texture": "practical_pipes:block/copper_pipe_basic"
   }
 }

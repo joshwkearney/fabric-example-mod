@@ -1,6 +1,6 @@
 {
-  "parent": "practical_pipes:block/templates/utility_pipe_center",
+  "parent": "practical_pipes:block/templates/pipe_center",
   "textures": {
-    "utility_texture": "practical_pipes:block/utility_pipe_amethyst"
+    "pipe_specialty_texture": "practical_pipes:block/copper_pipe_amethyst"
   }
 }

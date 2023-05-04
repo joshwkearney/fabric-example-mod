@@ -1,8 +1,6 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"pipe_texture": "practical_pipes:block/copper_pipe",
-		"pipe_specialty_texture": "practical_pipes:block/copper_pipe_amethyst",
 		"particle": "#pipe_specialty_texture"
 	},
 	"elements": [
@@ -19,8 +17,8 @@
 			}
 		},
 		{
-			"from": [4, 14, 4],
-			"to": [12, 16, 12],
+			"from": [5, 14, 5],
+			"to": [11, 16, 11],
 			"faces": {
 				"north": {"uv": [13, 0, 11, 6], "rotation": 270, "texture": "#pipe_specialty_texture"},
 				"east": {"uv": [11, 0, 13, 6], "rotation": 270, "texture": "#pipe_specialty_texture"},
@@ -46,11 +44,11 @@
 			"from": [5, 0, 5],
 			"to": [11, 2, 11],
 			"faces": {
-				"north": {"uv": [10, 0, 8, 6], "rotation": 90, "texture": "#pipe_specialty_texture"},
-				"east": {"uv": [8, 0, 10, 6], "rotation": 270, "texture": "#pipe_specialty_texture"},
-				"south": {"uv": [10, 6, 8, 0], "rotation": 90, "texture": "#pipe_specialty_texture"},
-				"west": {"uv": [8, 0, 10, 6], "rotation": 90, "texture": "#pipe_specialty_texture"},
-				"up": {"uv": [2, 0, 8, 6], "rotation": 180, "texture": "#pipe_specialty_texture", "cullface": "north"},
+				"north": {"uv": [13, 0, 11, 6], "rotation": 90, "texture": "#pipe_specialty_texture"},
+				"east": {"uv": [11, 0, 13, 6], "rotation": 270, "texture": "#pipe_specialty_texture"},
+				"south": {"uv": [13, 6, 11, 0], "rotation": 90, "texture": "#pipe_specialty_texture"},
+				"west": {"uv": [11, 0, 13, 6], "rotation": 90, "texture": "#pipe_specialty_texture"},
+				"up": {"uv": [9, 7, 15, 13], "rotation": 180, "texture": "#pipe_specialty_texture", "cullface": "north"},
 				"down": {"uv": [1, 8, 7, 14], "texture": "#pipe_specialty_texture", "cullface": "south"}
 			}
 		},

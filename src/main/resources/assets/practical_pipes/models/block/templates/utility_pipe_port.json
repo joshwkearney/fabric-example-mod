@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "#pipe_texture"
+		"particle": "#pipe_specialty_texture"
 	},
 	"elements": [
 		{
@@ -9,12 +9,12 @@
 			"from": [5, 5, 3],
 			"to": [11, 11, 4],
 			"faces": {
-				"north": {"uv": [0, 0, 6, 6], "texture": "#pipe_texture", "cullface": "north"},
-				"east": {"uv": [5, 0, 6, 6], "texture": "#pipe_texture"},
-				"south": {"uv": [13, 13, 16, 16], "texture": "#pipe_texture", "cullface": "south"},
-				"west": {"uv": [0, 0, 1, 6], "texture": "#pipe_texture"},
-				"up": {"uv": [0, 0, 6, 1], "texture": "#pipe_texture"},
-				"down": {"uv": [0, 5, 6, 6], "texture": "#pipe_texture"}
+				"north": {"uv": [2, 0, 8, 6], "texture": "#pipe_specialty_texture", "cullface": "north"},
+				"east": {"uv": [7, 0, 8, 6], "texture": "#pipe_specialty_texture"},
+				"south": {"uv": [13, 13, 16, 16], "texture": "#pipe_specialty_texture", "cullface": "south"},
+				"west": {"uv": [2, 0, 3, 6], "texture": "#pipe_specialty_texture"},
+				"up": {"uv": [2, 0, 8, 1], "texture": "#pipe_specialty_texture"},
+				"down": {"uv": [2, 5, 8, 6], "texture": "#pipe_specialty_texture"}
 			}
 		}
 	],

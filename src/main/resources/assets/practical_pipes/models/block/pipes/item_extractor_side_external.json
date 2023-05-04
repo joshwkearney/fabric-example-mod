@@ -1,6 +1,46 @@
 {
-  "parent": "practical_pipes:block/templates/utility_pipe_side_external",
-  "textures": {
-    "pipe_texture": "practical_pipes:block/copper_pipe"
-  }
+	"credit": "Made with Blockbench",
+	"textures": {
+		"pipe_texture": "practical_pipes:block/copper_pipe",
+		"pipe_specialty_texture": "practical_pipes:block/copper_pipe_amethyst",
+		"particle": "#pipe_specialty_texture"
+	},
+	"elements": [
+		{
+			"from": [5, 5, 3],
+			"to": [11, 11, 5],
+			"faces": {
+				"north": {"uv": [5, 7, 11, 13], "texture": "#pipe_texture", "cullface": "north"},
+				"east": {"uv": [11, 0, 13, 6], "texture": "#pipe_texture"},
+				"south": {"uv": [5, 7, 11, 13], "texture": "#pipe_texture", "cullface": "south"},
+				"west": {"uv": [11, 0, 13, 6], "texture": "#pipe_texture"},
+				"up": {"uv": [13, 6, 11, 0], "rotation": 90, "texture": "#pipe_texture"},
+				"down": {"uv": [13, 0, 11, 6], "rotation": 270, "texture": "#pipe_texture"}
+			}
+		},
+		{
+			"from": [4, 4, 0],
+			"to": [12, 12, 2],
+			"faces": {
+				"north": {"uv": [1, 8, 7, 14], "texture": "#pipe_specialty_texture", "cullface": "north"},
+				"east": {"uv": [11, 0, 13, 6], "texture": "#pipe_specialty_texture"},
+				"south": {"uv": [9, 7, 15, 13], "texture": "#pipe_specialty_texture", "cullface": "south"},
+				"west": {"uv": [11, 0, 13, 6], "texture": "#pipe_specialty_texture"},
+				"up": {"uv": [13, 6, 11, 0], "rotation": 270, "texture": "#pipe_specialty_texture"},
+				"down": {"uv": [13, 0, 11, 6], "rotation": 90, "texture": "#pipe_specialty_texture"}
+			}
+		},
+		{
+			"from": [5.5, 5.5, 2],
+			"to": [10.5, 10.5, 3],
+			"faces": {
+				"north": {"uv": [13, 13, 16, 16], "texture": "#pipe_texture", "cullface": "north"},
+				"east": {"uv": [12, 7, 13, 12], "texture": "#pipe_texture"},
+				"south": {"uv": [13, 13, 16, 16], "texture": "#pipe_texture", "cullface": "south"},
+				"west": {"uv": [12, 7, 13, 12], "rotation": 180, "texture": "#pipe_texture"},
+				"up": {"uv": [13, 12, 12, 7], "rotation": 90, "texture": "#pipe_texture"},
+				"down": {"uv": [13, 7, 12, 12], "rotation": 270, "texture": "#pipe_texture"}
+			}
+		}
+	]
 }

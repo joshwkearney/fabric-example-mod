@@ -1,0 +1,7 @@
+{
+  "parent": "practical_pipes:item/templates/pipe_solid",
+  "textures": {
+    "pipe_texture": "practical_pipes:block/copper_pipe",
+    "pipe_specialty_texture": "practical_pipes:block/copper_pipe_amethyst"
+  }
+}

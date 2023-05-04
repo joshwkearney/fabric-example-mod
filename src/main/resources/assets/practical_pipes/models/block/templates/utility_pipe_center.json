@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "#utility_texture"
+		"particle": "#pipe_specialty_texture"
 	},
 	"elements": [
 		{
@@ -9,12 +9,12 @@
 			"from": [4, 4, 4],
 			"to": [12, 12, 12],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "texture": "#utility_texture"},
-				"east": {"uv": [0, 0, 16, 16], "texture": "#utility_texture"},
-				"south": {"uv": [0, 0, 16, 16], "texture": "#utility_texture"},
-				"west": {"uv": [0, 0, 16, 16], "texture": "#utility_texture"},
-				"up": {"uv": [16, 16, 0, 0], "rotation": 90, "texture": "#utility_texture"},
-				"down": {"uv": [16, 0, 0, 16], "rotation": 270, "texture": "#utility_texture"}
+				"north": {"uv": [0, 7, 8, 15], "texture": "#pipe_specialty_texture"},
+				"east": {"uv": [0, 7, 8, 15], "texture": "#pipe_specialty_texture"},
+				"south": {"uv": [0, 7, 8, 15], "texture": "#pipe_specialty_texture"},
+				"west": {"uv": [0, 7, 8, 15], "texture": "#pipe_specialty_texture"},
+				"up": {"uv": [8, 15, 0, 7], "rotation": 90, "texture": "#pipe_specialty_texture"},
+				"down": {"uv": [8, 7, 0, 15], "rotation": 270, "texture": "#pipe_specialty_texture"}
 			}
 		}
 	]

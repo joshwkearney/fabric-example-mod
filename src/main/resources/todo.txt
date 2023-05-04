@@ -1,3 +1,16 @@
-- Remove extra polys on pipe_side and utility_pipe_side
 - Redo pipe.getOutlineShape(...)
 - Extractor pipes send items even if inventory is full. Items get deleted
+- Fix render ids getting saved to the world. Produces visual glitches on world load
+- Add correct behavior when pipes are broken
+- Add correct behavior when pipes are unloaded from the world
+- Cleanup render id memory leak in pipe renderer
+- Abstract pipes to not be item-specific
+- Add filter pipes (diamond)
+- Add valve pipes (quartz)
+- Add fluid pipes
+- Add energy pipes
+
+DONE - Remove extra polys on pipe_side and utility_pipe_side
+DONE - Remove extra polys on item models
+DONE - Combine pipe textures
+DONE - Change model for item extractor
