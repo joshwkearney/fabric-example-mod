@@ -1,10 +1,7 @@
-package joshuakearney.practical_pipes.features.pipes.item;
+package joshuakearney.practical_pipes.features.pipes.itemPipes;
 
 import joshuakearney.practical_pipes.features.pipes.PipeConnection;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldAccess;

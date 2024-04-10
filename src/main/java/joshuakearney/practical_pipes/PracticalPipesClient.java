@@ -7,7 +7,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import joshuakearney.practical_pipes.features.pipes.item.ItemPipeRenderer;
+import joshuakearney.practical_pipes.features.pipes.itemPipes.ItemPipeRenderer;
 
 @Environment(EnvType.CLIENT)
 public class PracticalPipesClient implements ClientModInitializer {

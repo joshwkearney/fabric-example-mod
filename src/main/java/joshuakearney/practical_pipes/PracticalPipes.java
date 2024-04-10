@@ -1,12 +1,12 @@
 package joshuakearney.practical_pipes;
 
-import joshuakearney.practical_pipes.features.pipes.item.ItemExtractorBlock;
-import joshuakearney.practical_pipes.features.pipes.item.ItemPipeBlock;
+import joshuakearney.practical_pipes.features.pipes.itemPipes.ItemExtractorBlock;
+import joshuakearney.practical_pipes.features.pipes.itemPipes.ItemPipeBlock;
 import joshuakearney.practical_pipes.features.tank.TankBlock;
 import joshuakearney.practical_pipes.features.tank.TankBlockEntity;
 import net.fabricmc.api.ModInitializer;
-import joshuakearney.practical_pipes.features.pipes.item.ItemExtractorBlockEntity;
-import joshuakearney.practical_pipes.features.pipes.item.ItemPipeBlockEntity;
+import joshuakearney.practical_pipes.features.pipes.itemPipes.ItemExtractorBlockEntity;
+import joshuakearney.practical_pipes.features.pipes.itemPipes.ItemPipeBlockEntity;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;

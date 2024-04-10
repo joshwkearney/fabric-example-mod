@@ -1,11 +1,10 @@
 package joshuakearney.practical_pipes.features.pipes;
 
-import joshuakearney.practical_pipes.features.pipes.item.ItemExtractorBlock;
-import joshuakearney.practical_pipes.features.pipes.item.ItemExtractorBlockEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Function;
@@ -14,6 +13,10 @@ public class PipeNavigator {
     private record PipeCoords(BlockPos start, BlockPos dest) { }
     private static Map<PipeCoords, BlockPos> nextPipe = new HashMap<>();
 
+    /**
+     * Returns null if there is no next pipe and the item should be dropped on the ground
+     */
+    @Nullable
     public static BlockPos findNextPipe(BlockPos start, BlockPos dest, World world) {
         var coords = new PipeCoords(start, dest);
 
@@ -98,13 +101,12 @@ public class PipeNavigator {
     }
 
     private static Iterable<BlockPos> getAttachedPipesOrInventories(BlockPos pipePos, World world) {
-        var result = new ArrayList<BlockPos>();
         var entity = world.getBlockEntity(pipePos);
-
         if (entity == null || !(entity instanceof PipeBlockEntity pipe)) {
-            return result;
+            return Collections.EMPTY_LIST;
         }
 
+        var result = new ArrayList<BlockPos>();
         for (var dir : Direction.values()) {
             if (!pipe.canItemPassThrough(dir)) {
                 continue;

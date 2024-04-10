@@ -14,11 +14,13 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
 public abstract class PipeBlockEntity extends BlockEntity {
-    private final Set<PipeResource> resources = new HashSet<>();
+    private final ArrayList<PipeResource> resources = new ArrayList<>();
+    private final ArrayList<PipeResource> resourcesToKeep = new ArrayList<>();
 
     public PipeBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -61,7 +63,7 @@ public abstract class PipeBlockEntity extends BlockEntity {
             return;
         }
 
-        var toRemove = new HashSet<PipeResource>();
+        var toRemove = new ArrayList<PipeResource>();
 
         for (var resource : this.resources) {
             resource.ticksInPipe++;
@@ -87,7 +89,7 @@ public abstract class PipeBlockEntity extends BlockEntity {
             }
             else if (entity instanceof Inventory dest) {
                 toRemove.add(resource);
-                this.deposit(resource.items, dest);
+                this.depositToInventory(resource.items, dest);
             }
         }
 
@@ -104,7 +106,7 @@ public abstract class PipeBlockEntity extends BlockEntity {
         }
     }
 
-    private void deposit(ItemStack sourceStack, Inventory dest) {
+    private void depositToInventory(ItemStack sourceStack, Inventory dest) {
         int destSlot = 0;
         for (; destSlot < dest.size(); destSlot++) {
             var destStack = dest.getStack(destSlot);
@@ -118,6 +120,7 @@ public abstract class PipeBlockEntity extends BlockEntity {
         }
 
         if (destSlot >= dest.size()) {
+            // TODO: Inventory full, drop item or reroute
             return;
         }
 
@@ -149,22 +152,54 @@ public abstract class PipeBlockEntity extends BlockEntity {
     @Override
     public void readNbt(NbtCompound tag) {
         super.readNbt(tag);
-        this.resources.clear();
+        this.resourcesToKeep.clear();
 
         int size = tag.getInt("resource_size");
         for (int i = 0; i < size; i++) {
             var resourceTag = tag.getCompound("resource_" + i);
             var resource = PipeResource.fromNbt(resourceTag);
 
-            this.resources.add(resource);
+            var existing = this.tryFindResource(
+                    resource.source,
+                    resource.destination,
+                    resource.createdOnTicks);
+
+            if (existing == null) {
+                this.resources.add(resource);
+            }
+            else {
+                existing.copyFrom(resource);
+                this.resourcesToKeep.add(existing);
+            }
         }
+
+        for (int i = this.resources.size() - 1; i >= 0; i--) {
+            var resource = this.resources.get(i);
+
+            if (!this.resourcesToKeep.contains(resource)) {
+                this.resources.remove(i);
+            }
+        }
+    }
+
+    @Nullable
+    private PipeResource tryFindResource(BlockPos source, BlockPos dest, long createdOn) {
+        for (var resource : this.resources) {
+            var isMatch = resource.createdOnTicks == createdOn
+                    && resource.source.equals(source)
+                    && resource.destination.equals(dest);
+
+            if (isMatch) {
+                return resource;
+            }
+        }
+
+        return null;
     }
 
     @Override
     public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        var result = BlockEntityUpdateS2CPacket.create(this, e -> e.createNbt());
-
-        return result;
+        return BlockEntityUpdateS2CPacket.create(this, e -> e.createNbt());
     }
 
     @Override

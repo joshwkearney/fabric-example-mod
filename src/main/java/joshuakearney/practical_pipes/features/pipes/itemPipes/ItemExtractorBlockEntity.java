@@ -1,4 +1,4 @@
-package joshuakearney.practical_pipes.features.pipes.item;
+package joshuakearney.practical_pipes.features.pipes.itemPipes;
 
 import joshuakearney.practical_pipes.PracticalPipes;
 import joshuakearney.practical_pipes.features.pipes.*;
@@ -10,10 +10,9 @@ import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemExtractorBlockEntity extends PipeBlockEntity {
-    private final int PULL_FREQUENCY = 1;
-    private final int DELAY_TICKS = 20 / PULL_FREQUENCY;
-    private static int idCounter = 0;
-    private int delayTickCounter = 0;
+    private final float PULL_FREQUENCY = 1;
+    private final float DELAY_TICKS = 20 / PULL_FREQUENCY;
+    private float delayTickCounter = 0;
     private int directionIndex = 0;
 
     public ItemExtractorBlockEntity(BlockPos pos, BlockState state) {
@@ -31,7 +30,10 @@ public class ItemExtractorBlockEntity extends PipeBlockEntity {
     @Override
     public void tickServer() {
         super.tickServer();
+        this.tryExtractItem();
+    }
 
+    private void tryExtractItem() {
         if (delayTickCounter > 0) {
             delayTickCounter--;
             return;
@@ -53,17 +55,26 @@ public class ItemExtractorBlockEntity extends PipeBlockEntity {
             return;
         }
 
-        var stack = remove(sourceInv);
-        if (stack.isEmpty()) {
-            return;
-        }
-
         var dest = PipeNavigator.findDestination(this.getPos(), this.getWorld());
         if (dest == null) {
             return;
         }
 
-        var resource = new PipeResource(stack, 20, 0, dest, null, null, idCounter++);
+        var stack = this.removeItemFrom(sourceInv);
+        if (stack.isEmpty()) {
+            return;
+        }
+
+        var resource = new PipeResource(
+                stack,
+                20,
+                0,
+                sourcePos,
+                dest,
+                this.world.getTime(),
+                null,
+                null);
+
         this.addResource(sourcePos, resource);
     }
 
@@ -83,7 +94,7 @@ public class ItemExtractorBlockEntity extends PipeBlockEntity {
         return null;
     }
 
-    private ItemStack remove(Inventory source) {
+    private ItemStack removeItemFrom(Inventory source) {
         if (source.isEmpty()) {
             return ItemStack.EMPTY;
         }

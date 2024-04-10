@@ -1,4 +1,4 @@
-package joshuakearney.practical_pipes.features.pipes.item;
+package joshuakearney.practical_pipes.features.pipes.itemPipes;
 
 import joshuakearney.practical_pipes.features.pipes.PipeBlockEntity;
 import net.fabricmc.api.EnvType;
@@ -9,8 +9,6 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.HashMap;
@@ -18,11 +16,6 @@ import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class ItemPipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
-    private static ItemStack stack = new ItemStack(Items.JUKEBOX, 1);
-
-    private static Map<Integer, Vec3d> resourceRenderLocations = new HashMap<>();
-
-
     public ItemPipeRenderer(BlockEntityRendererFactory.Context ctx) {}
     
     @Override
@@ -37,6 +30,11 @@ public class ItemPipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
         matrices.translate(0.5, 0.5, 0.5);
 
         for (var resource : blockEntity.getResources()) {
+            // Don't render anything if this item has been in here too long
+            if (resource.ticksInPipe > resource.ticksPerPipe) {
+                //continue;
+            }
+
             matrices.push();
 
             // Get the direction this item is supposed to be travelling
@@ -53,13 +51,11 @@ public class ItemPipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
                     .multiply((2*(resource.ticksInPipe + tickDelta) - resource.ticksPerPipe) / resource.ticksPerPipe);
 
             // Make sure there is a render location for this item
-            if (!resourceRenderLocations.containsKey(resource.id)) {
-                resourceRenderLocations.put(
-                        resource.id,
-                        blockEntity.getPos().toCenterPos().add(relativePos));
+            if (resource.clientRenderLocation == null) {
+                resource.clientRenderLocation = blockEntity.getPos().toCenterPos().add(relativePos);
             }
 
-            var renderLoc = resourceRenderLocations.get(resource.id);
+            var renderLoc = resource.clientRenderLocation;
             var correctLoc = blockEntity.getPos().toCenterPos().add(relativePos);
             var diff = correctLoc.subtract(renderLoc);
 
@@ -78,7 +74,7 @@ public class ItemPipeRenderer implements BlockEntityRenderer<PipeBlockEntity> {
                     .subtract(blockEntity.getPos().toCenterPos());
 
             // Update the location
-            resourceRenderLocations.put(resource.id, renderLoc.add(delta));
+            resource.clientRenderLocation = renderLoc.add(delta);
             matrices.translate(newRelativePos.x, newRelativePos.y, newRelativePos.z);
             matrices.scale(4f / 16, 4f / 16, 4f / 16);
 
